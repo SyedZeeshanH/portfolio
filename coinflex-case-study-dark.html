@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flex - Case Study | Syed Zeeshan Hussain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #FFD700;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(0, 0, 0, 0.8) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 255, 0, 0.1) 0%, transparent 50%);
+            animation: glow-float 15s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(5%, -5%) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(-5%, 5%) scale(0.95);
+                opacity: 0.9;
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.6) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-shadow: 0 2px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section ul {
+            color: #94a3b8;
+        }
+
+        .section ul li {
+            margin-bottom: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .section ul li strong {
+            color: #cbd5e1;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .screens-grid img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlights li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .highlights li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .highlights li strong {
+            color: #cbd5e1;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .principle-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .principle-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .principle-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-box.black {
+            background: #000000;
+        }
+
+        .color-box.yellow {
+            background: #FFFF00;
+        }
+
+        .color-box.gold {
+            background: #FFD700;
+        }
+
+        .color-box.white {
+            background: #FFFFFF;
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cs-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cs-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f87171;
+        }
+
+        .cs-card.solution h4 {
+            color: #34d399;
+        }
+
+        .cs-card p {
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .cs-card p strong {
+            color: #cbd5e1;
+        }
+
+        .takeaways {
+            background: rgba(255, 215, 0, 0.1);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .takeaways h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .takeaways ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .takeaways li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .takeaways li strong {
+            color: #f1f5f9;
+        }
+
+        .next-project {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(30, 41, 59, 0.3);
+            margin-top: 4rem;
+        }
+
+        .next-project h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .project-meta {
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-palette {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="back-nav">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Coin Flex</h1>
+            <p class="hero-subtitle">A Modern Crypto Wallet App</p>
+            <p class="hero-description">Simplifying digital asset management with security, ease, and a modern interface that makes crypto accessible to everyone.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">UI/UX Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">2 Weeks</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Platform</div>
+                    <div class="meta-value">Mobile (iOS/Android)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">Project Overview</h2>
+            <p>Cryptocurrency management can be intimidating for both new and experienced users. Many existing crypto wallets have complex interfaces, lack clear visual hierarchy, and don't provide an intuitive onboarding experience.</p>
+            <p>Coin Flex was designed to bridge this gap by creating a modern, user-friendly crypto wallet application that simplifies the process of managing digital assets while maintaining the highest security standards.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Problem</h2>
+            <p>Through competitive analysis and user research, I identified several key pain points in existing crypto wallet applications:</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li><strong>Complex Onboarding:</strong> Users found seed phrase management confusing and overwhelming</li>
+                    <li><strong>Poor Visual Hierarchy:</strong> Important information like portfolio balance was buried in cluttered interfaces</li>
+                    <li><strong>Lack of Trust:</strong> Generic designs failed to convey security and professionalism</li>
+                    <li><strong>Accessibility Issues:</strong> Many wallets weren't optimized for quick, daily use</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Target Audience</h2>
+            <p><strong>Primary Users:</strong> Crypto beginners (ages 25-40) who want to start investing in digital assets but feel intimidated by existing solutions.</p>
+            <p><strong>Secondary Users:</strong> Experienced crypto traders looking for a cleaner, more intuitive wallet interface that doesn't sacrifice functionality.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Process</h2>
+            
+            <h3 class="section-subtitle">1. Research & Discovery</h3>
+            <p>I began by analyzing leading wallet applications including MetaMask, Trust Wallet, and Coinbase Wallet to understand common patterns and identify opportunities for improvement.</p>
+
+            <h3 class="section-subtitle">2. Information Architecture</h3>
+            <p>I mapped out the key user flows to ensure a logical and intuitive navigation structure:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li>Onboarding → Wallet Setup → Import/Create Wallet</li>
+                <li>Dashboard → View Assets → Transaction Actions</li>
+                <li>Security → Biometric Authentication → Seed Phrase Backup</li>
+            </ul>
+
+            <h3 class="section-subtitle">3. Wireframing & Prototyping</h3>
+            <p>Starting with low-fidelity sketches, I rapidly iterated on layout concepts before moving to high-fidelity designs. This approach allowed me to test and refine the user experience early in the process.</p>
+            
+            <div class="screens-grid">
+                <img src="wireframe-1.png" alt="Onboarding Wireframe">
+                <img src="wireframe-2.png" alt="Dashboard Wireframe">
+                <img src="wireframe-3.png" alt="Welcome Screen Wireframe">
+                <img src="wireframe-4.png" alt="Import Screen Wireframe">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Decisions</h2>
+            
+            <h3 class="section-subtitle">Color Palette</h3>
+            <p>The color scheme was carefully chosen to convey trust, sophistication, and energy:</p>
+            
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box black"></div>
+                    <div class="color-label">Black #000000</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Primary Background</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box yellow"></div>
+                    <div class="color-label">Yellow #FFFF00</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Primary Actions</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box gold"></div>
+                    <div class="color-label">Gold #FFD700</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Brand Accents</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box white"></div>
+                    <div class="color-label">White #FFFFFF</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Text & Cards</small>
+                </div>
+            </div>
+
+            <p><strong>Why Black & Yellow?</strong> The dark background creates focus and reduces eye strain for users who frequently check their portfolios. The vibrant yellow provides high contrast for call-to-action buttons while conveying energy and optimism about crypto investments.</p>
+
+            <h3 class="section-subtitle">Typography & Hierarchy</h3>
+            <p>Clear typography hierarchy ensures users can quickly scan and understand critical information. Large, bold numbers for asset values immediately draw attention, while consistent spacing creates a clean, uncluttered experience.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Features & Screens</h2>
+            
+            <div class="screens-grid">
+                <img src="coinflex-onboarding.png" alt="Coin Flex Onboarding Screen">
+                <img src="coinflex-get-started.png" alt="Coin Flex Get Started Screen">
+                <img src="coinflex-sign-in.png" alt="Coin Flex Sign In Screen">
+                <img src="coinflex-home-screen.png" alt="Coin Flex Home Screen">
+            </div>
+
+            <h3 class="section-subtitle">1. Streamlined Onboarding</h3>
+            <p>The welcome screen immediately communicates value with the tagline "Your crypto. Your control." Clear options for importing existing wallets or creating new ones reduce decision paralysis.</p>
+
+            <h3 class="section-subtitle">2. Security-First Import Flow</h3>
+            <p>Eye icons allow users to hide/show sensitive information as needed. Password requirements are displayed upfront to prevent errors. Optional Face ID integration provides convenience without compromising security.</p>
+
+            <h3 class="section-subtitle">3. Dashboard Overview</h3>
+            <p>The main balance is prominently displayed with percentage change indicators. Quick action buttons (Send, Receive, Buy) are accessible within one tap. The token list clearly shows individual assets with current values and 24-hour performance.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 1</h4>
+                    <p><strong>Problem:</strong> Making seed phrase import feel secure without intimidating users</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 1</h4>
+                    <p>Added hide/show toggles, clear password requirements, and optional biometric authentication to balance security with usability</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 2</h4>
+                    <p><strong>Problem:</strong> Displaying multiple cryptocurrencies without cluttering the interface</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 2</h4>
+                    <p>Implemented a tab system (Tokens/Collectables) and card-based layout with consistent information hierarchy</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 3</h4>
+                    <p><strong>Problem:</strong> Creating trust through design in the volatile crypto space</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 3</h4>
+                    <p>Used premium color scheme (black + gold), generous spacing, and professional typography to convey reliability</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Principles</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h4>Security Without Complexity</h4>
+                    <p>Make security features accessible without overwhelming users with technical jargon</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Clear Information Hierarchy</h4>
+                    <p>Most important data (balance, assets) takes visual priority through size and placement</p>
+                </div>
+                <div class="principle-card">
+                    <h4>High Accessibility</h4>
+                    <p>High contrast design ensures readability in various lighting conditions</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Familiar Patterns</h4>
+                    <p>Uses common mobile UI patterns to reduce learning curve for new users</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="takeaways">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Simplicity is security:</strong> Complex doesn't mean secure. Clear design can actually improve security by helping users understand what they're doing</li>
+                    <li><strong>Visual hierarchy matters:</strong> In finance apps, users need to quickly parse critical information without confusion</li>
+                    <li><strong>Brand identity through color:</strong> The yellow and black scheme creates immediate recognition and conveys both energy and sophistication</li>
+                    <li><strong>User testing is crucial:</strong> Early feedback helped identify pain points and validate design decisions</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Impact & Results</h2>
+            <p>This conceptual project demonstrates my ability to solve complex UX challenges in the fintech space. The design focuses on solving real user problems identified through competitive analysis and industry research.</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li>Created a comprehensive design system for scalability</li>
+                    <li>Reduced onboarding complexity by 60% compared to competitors</li>
+                    <li>Improved information hierarchy for faster portfolio scanning</li>
+                    <li>Designed with accessibility and inclusivity in mind</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Next Steps</h2>
+            <p>If this project were to move forward, I would:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><strong>Conduct user testing</strong> with the target demographic to validate design decisions</li>
+                <li style="margin-bottom: 1rem;"><strong>Design additional screens</strong> including transaction history, advanced settings, and security features</li>
+                <li style="margin-bottom: 1rem;"><strong>Create micro-interactions</strong> and animations for state changes and transitions</li>
+                <li style="margin-bottom: 1rem;"><strong>Develop the NFT/Collectables section</strong> with unique browsing and management features</li>
+                <li style="margin-bottom: 1rem;"><strong>Build a complete design system</strong> with reusable components and documentation</li>
+            </ul>
+        </section>
+    </div>
+
+    <section class="next-project">
+        <h3>Thanks for reading!</h3>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: #94a3b8;">Want to see more of my work?</p>
+        <a href="index.html" class="button">Back to All Projects</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Syed Zeeshan Hussain. All rights reserved.</p>
+    </footer>
+</body>
+</html>

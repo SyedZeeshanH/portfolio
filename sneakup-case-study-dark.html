@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SneakUp - Case Study | Syed Zeeshan Hussain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #FF6B6B;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(255, 107, 107, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(26, 26, 26, 0.8) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(239, 68, 68, 0.15) 0%, transparent 50%);
+            animation: glow-float 15s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(5%, -5%) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(-5%, 5%) scale(0.95);
+                opacity: 0.9;
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.6) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-shadow: 0 2px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #FF6B6B;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #FF6B6B;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section ul {
+            color: #94a3b8;
+        }
+
+        .section ul li {
+            margin-bottom: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .section ul li strong {
+            color: #cbd5e1;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .screens-grid img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlights li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .highlights li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FF6B6B;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .highlights li strong {
+            color: #cbd5e1;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .principle-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .principle-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .principle-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-box.black {
+            background: #000000;
+        }
+
+        .color-box.dark-gray {
+            background: #1a1a1a;
+        }
+
+        .color-box.red {
+            background: #FF6B6B;
+        }
+
+        .color-box.white {
+            background: #FFFFFF;
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cs-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cs-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f87171;
+        }
+
+        .cs-card.solution h4 {
+            color: #34d399;
+        }
+
+        .cs-card p {
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .cs-card p strong {
+            color: #cbd5e1;
+        }
+
+        .takeaways {
+            background: rgba(255, 107, 107, 0.15);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .takeaways h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .takeaways ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .takeaways li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #FF6B6B;
+        }
+
+        .takeaways li strong {
+            color: #f1f5f9;
+        }
+
+        .next-project {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(30, 41, 59, 0.3);
+            margin-top: 4rem;
+        }
+
+        .next-project h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.5);
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .project-meta { gap: 1.5rem; }
+            .section-title { font-size: 1.8rem; }
+            .screens-grid { grid-template-columns: 1fr; }
+            .color-palette { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="back-nav">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SneakUp</h1>
+            <p class="hero-subtitle">Your Sneakers, Your Style</p>
+            <p class="hero-description">A premium sneaker shopping app that brings all major brands together in one seamless experience. Discover, browse, and buy the latest and most iconic sneakers.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">UI/UX Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">3 Weeks</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Platform</div>
+                    <div class="meta-value">Mobile (iOS/Android)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">Project Overview</h2>
+            <p>Sneaker culture has exploded in recent years, but finding authentic branded sneakers from multiple brands often requires visiting numerous websites and apps. SneakUp was designed to solve this fragmentation by creating a unified platform where sneaker enthusiasts can discover and purchase shoes from all major brands in one elegant experience.</p>
+            <p>The app targets sneakerheads, fashion-conscious shoppers, and young adults who want easy access to the latest releases and iconic classics without the hassle of jumping between different brand websites.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Problem</h2>
+            <p>Through market research and user interviews with sneaker enthusiasts, I identified key pain points in the current sneaker shopping experience:</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li><strong>Fragmented Shopping:</strong> Users have to visit multiple apps/websites to browse different brands</li>
+                    <li><strong>Missing Releases:</strong> It's easy to miss new drops when they're spread across different platforms</li>
+                    <li><strong>Comparison Difficulty:</strong> Hard to compare prices and styles across brands</li>
+                    <li><strong>Time Consuming:</strong> Shopping for sneakers takes too long with multiple apps</li>
+                    <li><strong>Authenticity Concerns:</strong> Users worry about buying fake sneakers from third-party sellers</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Target Audience</h2>
+            <p><strong>Primary Users:</strong> Sneaker enthusiasts and collectors (ages 18-35) who actively follow sneaker culture and want access to the latest releases.</p>
+            <p><strong>Secondary Users:</strong> Fashion-conscious shoppers who appreciate quality footwear and want a curated selection of premium brands.</p>
+            <p><strong>User Goals:</strong> Find authentic branded sneakers easily, discover new releases, compare options across brands, and make purchases with confidence.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Process</h2>
+            
+            <h3 class="section-subtitle">1. Research & Discovery</h3>
+            <p>I analyzed existing e-commerce apps including Nike SNKRS, Adidas, StockX, and GOAT to understand industry standards and identify opportunities for differentiation. Key insight: users wanted a simpler, more unified experience without losing brand identity.</p>
+
+            <h3 class="section-subtitle">2. User Personas & Journey Mapping</h3>
+            <p>I created detailed personas representing different types of sneaker shoppers—from casual buyers to serious collectors. This helped inform features like brand filters, popular items showcase, and personalized recommendations.</p>
+
+            <h3 class="section-subtitle">3. Information Architecture</h3>
+            <p>The app structure prioritizes discovery and quick purchasing:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li>Onboarding → Brand Discovery → Personalized Home Feed</li>
+                <li>Browse by Brand/Category → Product Details → Cart → Checkout</li>
+                <li>Wishlist → Favorites → Quick Reorder</li>
+            </ul>
+
+            <h3 class="section-subtitle">4. Wireframing & Prototyping</h3>
+            <p>Starting with low-fidelity wireframes, I explored different layout options and navigation patterns. The focus was on creating an intuitive browsing experience that felt premium yet accessible.</p>
+            
+            <div class="screens-grid">
+                <img src="sneakup-wireframe-1.png" alt="SneakUp Wireframe 1">
+                <img src="sneakup-wireframe-2.png" alt="SneakUp Wireframe 2">
+                <img src="sneakup-wireframe-3.png" alt="SneakUp Wireframe 3">
+                <img src="sneakup-wireframe-4.png" alt="SneakUp Wireframe 4">
+                <img src="sneakup-wireframe-5.png" alt="SneakUp Wireframe 5">
+                <img src="sneakup-wireframe-6.png" alt="SneakUp Wireframe 6">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Decisions</h2>
+            
+            <h3 class="section-subtitle">Color Palette</h3>
+            <p>The bold black and red color scheme was chosen to convey sophistication, energy, and premium quality:</p>
+            
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box black"></div>
+                    <div class="color-label">Black #000000</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Primary Background</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box dark-gray"></div>
+                    <div class="color-label">Dark Gray #1a1a1a</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Secondary</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box red"></div>
+                    <div class="color-label">Coral Red #FF6B6B</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Accent & CTAs</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box white"></div>
+                    <div class="color-label">White #FFFFFF</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Text & Cards</small>
+                </div>
+            </div>
+
+            <p><strong>Why Dark Theme?</strong> Black backgrounds make product images pop and create a premium, gallery-like feel that's popular in sneaker culture. The red accent provides energy and draws attention to important actions.</p>
+
+            <h3 class="section-subtitle">Typography & Visual Hierarchy</h3>
+            <p>Bold, modern typography with strong contrast ensures readability against dark backgrounds. Product names and prices are prominently displayed, while secondary information remains accessible but doesn't compete for attention.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Features & Screens</h2>
+            
+            <div class="screens-grid">
+                <img src="sneakup-splash-1.png" alt="SneakUp Splash Screen 1">
+                <img src="sneakup-splash-2.png" alt="SneakUp Splash Screen 2">
+                <img src="sneakup-onboarding.png" alt="SneakUp Onboarding">
+            </div>
+
+            <h3 class="section-subtitle">1. Brand-Focused Onboarding</h3>
+            <p>The splash screens and onboarding immediately establish SneakUp's premium identity with the tagline "Your Sneakers, Your Style." The onboarding screen "Discover Your Style" sets expectations for a curated, personalized shopping experience.</p>
+
+            <div class="screens-grid">
+                <img src="sneakup-home.png" alt="SneakUp Home Screen">
+            </div>
+
+            <h3 class="section-subtitle">2. Unified Brand Discovery</h3>
+            <p>The home screen showcases all major brands (Nike, Adidas, Under Armour, New Balance) in one place with quick-access brand buttons. Featured promotions like "New User Deal - 20% OFF" drive immediate engagement.</p>
+
+            <h3 class="section-subtitle">3. Most Popular Section</h3>
+            <p>Highlighting trending and popular items helps users discover what others are buying. Each product card includes essential info: image, name, price, and wishlist functionality—keeping the interface clean yet informative.</p>
+
+            <div class="screens-grid">
+                <img src="sneakup-product-details.png" alt="SneakUp Product Details">
+            </div>
+
+            <h3 class="section-subtitle">4. Detailed Product Pages</h3>
+            <p>Product detail pages provide comprehensive information including multiple color options, size selection, pricing, and detailed descriptions. The "Add to cart" button uses the signature red accent to drive conversions.</p>
+
+            <div class="screens-grid">
+                <img src="sneakup-cart.png" alt="SneakUp Shopping Cart">
+            </div>
+
+            <h3 class="section-subtitle">5. Streamlined Shopping Cart</h3>
+            <p>The cart interface shows all selected items with quantity controls, size display, and instant price calculations. The prominent "Checkout" button ensures a smooth path to purchase.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 1</h4>
+                    <p><strong>Problem:</strong> How to showcase multiple brands without losing individual brand identity</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 1</h4>
+                    <p>Created distinct brand filter buttons with authentic logos while maintaining a unified visual system through consistent dark theme and layout</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 2</h4>
+                    <p><strong>Problem:</strong> Making product images stand out in a dark interface</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 2</h4>
+                    <p>Used dark gray cards with subtle shadows that make sneaker images pop while maintaining visual hierarchy and premium feel</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 3</h4>
+                    <p><strong>Problem:</strong> Simplifying the checkout process for quick purchases</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 3</h4>
+                    <p>Designed a streamlined cart with all essential info visible and a prominent checkout button to reduce friction</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Principles</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h4>Premium & Bold</h4>
+                    <p>Dark theme creates a gallery-like experience that lets sneakers take center stage</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Unified Experience</h4>
+                    <p>One app for all brands—no more jumping between different platforms</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Quick Discovery</h4>
+                    <p>Popular items and brand filters help users find what they want fast</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Trust & Authenticity</h4>
+                    <p>Official brand partnerships ensure every product is 100% authentic</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="takeaways">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Consolidation creates value:</strong> Bringing multiple brands together in one app solves a real pain point for sneaker shoppers</li>
+                    <li><strong>Dark UI for product showcase:</strong> Black backgrounds make product photography shine and create a premium aesthetic</li>
+                    <li><strong>Balance brand identity with unity:</strong> Respected individual brand logos while maintaining a cohesive experience</li>
+                    <li><strong>Speed matters in e-commerce:</strong> Quick filters, clear navigation, and streamlined checkout increase conversions</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Impact & Results</h2>
+            <p>SneakUp demonstrates my ability to design sophisticated e-commerce experiences that solve real market problems. The design balances premium aesthetics with functional shopping features.</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li>Created a unified platform for multiple premium brands</li>
+                    <li>Designed an intuitive browsing experience with quick brand filtering</li>
+                    <li>Developed a premium dark theme that enhances product presentation</li>
+                    <li>Built a streamlined cart and checkout flow for faster purchases</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Next Steps</h2>
+            <p>If this project were to move forward, I would:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><strong>Add personalization features</strong> based on browsing history and preferences</li>
+                <li style="margin-bottom: 1rem;"><strong>Design a release calendar</strong> for upcoming drops and limited editions</li>
+                <li style="margin-bottom: 1rem;"><strong>Create social features</strong> for sharing favorites and getting style inspiration</li>
+                <li style="margin-bottom: 1rem;"><strong>Implement AR try-on</strong> to help users visualize sneakers before buying</li>
+                <li style="margin-bottom: 1rem;"><strong>Add user reviews and ratings</strong> to build trust and community</li>
+            </ul>
+        </section>
+    </div>
+
+    <section class="next-project">
+        <h3>Thanks for reading!</h3>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: #94a3b8;">Want to see more of my work?</p>
+        <a href="index.html" class="button">Back to All Projects</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Syed Zeeshan Hussain. All rights reserved.</p>
+    </footer>
+</body>
+</html>

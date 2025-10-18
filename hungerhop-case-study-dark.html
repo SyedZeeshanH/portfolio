@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HungerHop - Case Study | Syed Zeeshan Hussain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #f59e0b;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(245, 158, 11, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(217, 119, 6, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(251, 191, 36, 0.15) 0%, transparent 50%);
+            animation: glow-float 15s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(5%, -5%) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(-5%, 5%) scale(0.95);
+                opacity: 0.9;
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.6) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-shadow: 0 2px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #f59e0b;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #f59e0b;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section ul {
+            color: #94a3b8;
+        }
+
+        .section ul li {
+            margin-bottom: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .section ul li strong {
+            color: #cbd5e1;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .screens-grid img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlights li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .highlights li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .highlights li strong {
+            color: #cbd5e1;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .principle-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .principle-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .principle-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-box.charcoal {
+            background: #374151;
+        }
+
+        .color-box.orange {
+            background: #f59e0b;
+        }
+
+        .color-box.yellow {
+            background: #fbbf24;
+        }
+
+        .color-box.light {
+            background: #f3f4f6;
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cs-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cs-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f87171;
+        }
+
+        .cs-card.solution h4 {
+            color: #34d399;
+        }
+
+        .cs-card p {
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .cs-card p strong {
+            color: #cbd5e1;
+        }
+
+        .takeaways {
+            background: rgba(245, 158, 11, 0.15);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .takeaways h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .takeaways ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .takeaways li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+
+        .takeaways li strong {
+            color: #f1f5f9;
+        }
+
+        .next-project {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(30, 41, 59, 0.3);
+            margin-top: 4rem;
+        }
+
+        .next-project h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .project-meta {
+                gap: 1.5rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+            .color-palette {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="back-nav">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>HungerHop</h1>
+            <p class="hero-subtitle">Your Hunger, Our Hustle</p>
+            <p class="hero-description">A fast food delivery app designed for busy professionals and bachelors who want delicious meals without the hassle of cooking. Quick, easy, and satisfying.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">UI/UX Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">1 Week</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Platform</div>
+                    <div class="meta-value">Mobile (iOS/Android)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">Project Overview</h2>
+            <p>In today's fast-paced world, busy professionals and bachelors often struggle to find time for cooking or simply don't have the skills. HungerHop was designed to solve this everyday problem by providing a seamless food delivery experience that's quick, intuitive, and satisfying.</p>
+            <p>The app targets time-constrained individuals who value convenience and want access to quality fast food without the friction of complicated ordering processes or lengthy wait times.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Problem</h2>
+            <p>Through user interviews with busy professionals and bachelor living alone, I identified key pain points in current food delivery experiences:</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li><strong>Decision Fatigue:</strong> Too many options without clear categorization makes ordering overwhelming</li>
+                    <li><strong>Complex Checkout:</strong> Lengthy ordering processes discourage quick meal decisions</li>
+                    <li><strong>Hidden Costs:</strong> Users frustrated by surprise fees appearing at checkout</li>
+                    <li><strong>No Quick Access:</strong> Can't easily reorder favorites or find popular items</li>
+                    <li><strong>Poor Discovery:</strong> Difficult to explore different food categories efficiently</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Target Audience</h2>
+            <p><strong>Primary Users:</strong> Busy professionals (ages 22-40) who work long hours and need convenient meal solutions without spending time cooking.</p>
+            <p><strong>Secondary Users:</strong> Bachelors and students living alone who lack cooking skills or kitchen facilities and rely on food delivery for daily meals.</p>
+            <p><strong>User Goals:</strong> Order food quickly, discover new restaurants easily, track orders in real-time, and enjoy transparent pricing with no surprises.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Process</h2>
+            
+            <h3 class="section-subtitle">1. Research & Discovery</h3>
+            <p>I analyzed leading food delivery apps including Uber Eats, DoorDash, and Zomato to understand industry standards and user expectations. Key insight: users wanted faster ordering with fewer steps and better category organization.</p>
+
+            <h3 class="section-subtitle">2. User Personas & Journey Mapping</h3>
+            <p>I created detailed personas representing different user types—from busy professionals ordering lunch during work to bachelors planning dinner. This helped prioritize features like quick category browsing and streamlined checkout.</p>
+
+            <h3 class="section-subtitle">3. Information Architecture</h3>
+            <p>The app structure emphasizes speed and simplicity:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li>Home → Category Selection → Item Details → Cart → Checkout</li>
+                <li>Popular Items → Quick Add to Cart</li>
+                <li>Favorites → Reorder with One Tap</li>
+            </ul>
+
+            <h3 class="section-subtitle">4. Wireframing & Prototyping</h3>
+            <p>Starting with low-fidelity wireframes, I explored different layouts for category display and cart functionality. The focus was on minimizing steps between craving and ordering.</p>
+            
+            <div class="screens-grid">
+                <img src="hungerhop-wireframe-1.png" alt="HungerHop Wireframe 1">
+                <img src="hungerhop-wireframe-2.png" alt="HungerHop Wireframe 2">
+                <img src="hungerhop-wireframe-3.png" alt="HungerHop Wireframe 3">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Decisions</h2>
+            
+            <h3 class="section-subtitle">Color Palette</h3>
+            <p>The warm, appetizing color scheme was chosen to stimulate appetite and convey energy:</p>
+            
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box charcoal"></div>
+                    <div class="color-label">Charcoal #374151</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Primary Background</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box orange"></div>
+                    <div class="color-label">Orange #f59e0b</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Primary Brand</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box yellow"></div>
+                    <div class="color-label">Yellow #fbbf24</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Accents & Highlights</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box light"></div>
+                    <div class="color-label">Light Gray #f3f4f6</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Cards & Backgrounds</small>
+                </div>
+            </div>
+
+            <p><strong>Why Orange & Yellow?</strong> These warm colors are scientifically proven to stimulate appetite and create feelings of happiness and energy—perfect for a food delivery app. The charcoal background provides sophistication while making food images pop.</p>
+
+            <h3 class="section-subtitle">Typography & Visual Hierarchy</h3>
+            <p>Bold, readable typography ensures quick scanning. Item names, prices, and ratings are prominently displayed, allowing users to make informed decisions at a glance without reading lengthy descriptions.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Key Features & Screens</h2>
+            
+            <div class="screens-grid">
+                <img src="hungerhop-splash.png" alt="HungerHop Splash Screen">
+            </div>
+
+            <h3 class="section-subtitle">1. Engaging Splash Screen</h3>
+            <p>The splash screen immediately establishes brand identity with the tagline "Your hunger, our hustle" and a friendly illustration of delivery service. The playful yet professional tone sets user expectations for a pleasant ordering experience.</p>
+
+            <div class="screens-grid">
+                <img src="hungerhop-home.png" alt="HungerHop Home Screen">
+            </div>
+
+            <h3 class="section-subtitle">2. Intuitive Home & Discovery</h3>
+            <p>The home screen features smart organization with multiple discovery paths:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Category Icons:</strong> Quick access to Pizza, Burger, Biryani, Desi, BBQ, and more with appetizing food photography</li>
+                <li><strong>Popular Items Section:</strong> Showcases trending dishes like Pepperoni Pizza (Rs.1500), Biryani (Rs.500), Beef Burger (Rs.800), and Alfredo Pasta (Rs.750)</li>
+                <li><strong>Star Ratings:</strong> Visual feedback helps users choose high-quality options</li>
+                <li><strong>Restaurant Attribution:</strong> Each item shows its source (California Pizza, Burger King, etc.)</li>
+                <li><strong>Welcome Banner:</strong> Personalized greeting creates a friendly, inviting atmosphere</li>
+            </ul>
+
+            <div class="screens-grid">
+                <img src="hungerhop-cart.png" alt="HungerHop Cart Screen">
+            </div>
+
+            <h3 class="section-subtitle">3. Streamlined Cart Experience</h3>
+            <p>The cart interface prioritizes clarity and control:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Visual Product Cards:</strong> High-quality food images with item names, sizes (M, S), and prices</li>
+                <li><strong>Quantity Controls:</strong> Easy-to-tap minus/plus buttons for adjusting order quantities</li>
+                <li><strong>Quick Delete:</strong> Trash icon for instant item removal</li>
+                <li><strong>Item Counter:</strong> Clear "3 items" indicator at the top</li>
+                <li><strong>Prominent Total:</strong> Large price display with bold "Checkout" button</li>
+                <li><strong>Bottom Navigation:</strong> Persistent access to Home, Favorites, Cart, and Profile</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 1</h4>
+                    <p><strong>Problem:</strong> How to help users quickly find what they want to eat among hundreds of options</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 1</h4>
+                    <p>Created dual discovery paths: visual category icons for browsing and popular items section for quick decisions</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 2</h4>
+                    <p><strong>Problem:</strong> Reducing friction in the checkout process to prevent cart abandonment</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 2</h4>
+                    <p>Designed a clean cart with all controls on one screen and a prominent checkout button—no hidden steps</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 3</h4>
+                    <p><strong>Problem:</strong> Making food photography appetizing while maintaining fast load times</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 3</h4>
+                    <p>Used optimized, high-quality food images with consistent styling that creates visual appetite appeal</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Design Principles</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h4>Speed Over Everything</h4>
+                    <p>Every screen is designed to minimize taps between hunger and satisfaction</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Visual First</h4>
+                    <p>Appetizing food photography drives decisions faster than text descriptions</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Transparent Pricing</h4>
+                    <p>All costs displayed upfront—no surprises at checkout to build trust</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Social Proof</h4>
+                    <p>Star ratings and popular items help users make confident choices quickly</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="takeaways">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Reduce decision fatigue:</strong> Clear categories and popular items help hungry users decide faster</li>
+                    <li><strong>Visual appetite appeal:</strong> High-quality food photography is essential for food delivery success</li>
+                    <li><strong>Speed wins conversions:</strong> Every unnecessary tap increases cart abandonment—simplicity is key</li>
+                    <li><strong>Trust through transparency:</strong> Showing prices, ratings, and restaurant names builds user confidence</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Impact & Results</h2>
+            <p>HungerHop demonstrates my ability to design consumer-facing apps that balance beautiful aesthetics with functional simplicity. The design focuses on removing friction from the ordering process.</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li>Created an intuitive category-based navigation system</li>
+                    <li>Designed a streamlined cart with transparent pricing</li>
+                    <li>Built engaging visual hierarchy highlighting popular items</li>
+                    <li>Developed a warm, appetizing color scheme that drives engagement</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Next Steps</h2>
+            <p>If this project were to move forward, I would:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><strong>Add real-time order tracking</strong> with delivery person location and ETA</li>
+                <li style="margin-bottom: 1rem;"><strong>Design personalized recommendations</strong> based on order history and preferences</li>
+                <li style="margin-bottom: 1rem;"><strong>Create a rewards program</strong> to encourage repeat orders</li>
+                <li style="margin-bottom: 1rem;"><strong>Implement dietary filters</strong> for vegetarian, vegan, halal, and other preferences</li>
+                <li style="margin-bottom: 1rem;"><strong>Add social features</strong> for sharing favorite restaurants and ordering together</li>
+            </ul>
+        </section>
+    </div>
+
+    <section class="next-project">
+        <h3>Thanks for reading!</h3>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: #94a3b8;">Want to see more of my work?</p>
+        <a href="index.html" class="button">Back to All Projects</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Syed Zeeshan Hussain. All rights reserved.</p>
+    </footer>
+</body>
+</html>

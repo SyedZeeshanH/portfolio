@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Zeeshan Hussain - UI/UX Designer (Dark)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #818cf8;
+        }
+
+        /* Hero Section with Gradient Glow */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Gradient Glow Background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+            animation: glow-float 15s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(5%, -5%) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(-5%, 5%) scale(0.95);
+                opacity: 0.9;
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.6) 70%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+            font-weight: 700;
+            text-shadow: 0 2px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: #cbd5e1;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 0.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            border: 2px solid #818cf8;
+            color: #cbd5e1;
+            box-shadow: none;
+        }
+
+        .cta-button-secondary:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: #a5b4fc;
+            color: #f1f5f9;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #f1f5f9;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(129, 140, 248, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+
+        .project-info p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            background: rgba(30, 41, 59, 0.3);
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .skills {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .skill {
+            padding: 1rem 2rem;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: 30px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            color: #cbd5e1;
+            transition: all 0.3s;
+        }
+
+        .skill:hover {
+            background: rgba(99, 102, 241, 0.25);
+            border-color: rgba(129, 140, 248, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            bottom: 0;
+            right: 0;
+            filter: blur(100px);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-link {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.3rem; }
+            nav ul { gap: 1.5rem; font-size: 0.9rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Syed Zeeshan Hussain</h1>
+            <h2>UI/UX Designer</h2>
+            <p>I create intuitive and beautiful digital experiences that solve real user problems.</p>
+            
+            <div style="margin: 2rem 0;">
+                <a href="#work" class="cta-button">View My Work</a>
+                <a href="#contact" class="cta-button cta-button-secondary">Let's Talk</a>
+            </div>
+            
+            <p style="max-width: 700px; margin: 2rem auto 0; font-size: 1.05rem; line-height: 1.7; color: #94a3b8;">
+                I'm open to exciting opportunities — whether freelance, remote, or on-site collaborations. Let's create something amazing together.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid">
+            <!-- Coin Flex -->
+            <div class="project-card" onclick="window.location.href='coinflex-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #000000 0%, #333333 100%);">
+                    <img src="coinflex-icon.png" alt="Coin Flex">
+                </div>
+                <div class="project-info">
+                    <h3>Coin Flex</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Crypto</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <p>A modern crypto wallet app designed to simplify digital asset management with security and ease.</p>
+                </div>
+            </div>
+
+            <!-- Flexly -->
+            <div class="project-card" onclick="window.location.href='flexly-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #00D66B 0%, #00B359 100%);">
+                    <img src="flexly-icon.png" alt="Flexly">
+                </div>
+                <div class="project-info">
+                    <h3>Flexly</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Fitness</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <p>A fitness app that helps users build strength and flexibility with bodyweight workouts—train anywhere, anytime.</p>
+                </div>
+            </div>
+
+            <!-- SneakUp -->
+            <div class="project-card" onclick="window.location.href='sneakup-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);">
+                    <img src="sneakup-icon.png" alt="SneakUp">
+                </div>
+                <div class="project-info">
+                    <h3>SneakUp</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <p>Your one-stop shop for all branded sneakers. Discover, browse, and buy the latest and most iconic sneakers in one place.</p>
+                </div>
+            </div>
+
+            <!-- Smart Home -->
+            <div class="project-card" onclick="window.location.href='smarthome-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                    <img src="smarthome-icon.png" alt="Smart Home">
+                </div>
+                <div class="project-info">
+                    <h3>Smart Home</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">IoT</span>
+                        <span class="tag">Lifestyle</span>
+                    </div>
+                    <p>Control your entire home from a single device. Manage rooms, devices, and monitor energy usage from anywhere, anytime.</p>
+                </div>
+            </div>
+
+            <!-- HungerHop -->
+            <div class="project-card" onclick="window.location.href='hungerhop-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <img src="hungerhop-icon.png" alt="HungerHop">
+                </div>
+                <div class="project-info">
+                    <h3>HungerHop</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Food Delivery</span>
+                        <span class="tag">E-commerce</span>
+                    </div>
+                    <p>Fast food delivery made easy. Browse categories, discover popular items, and enjoy quick checkout—perfect for busy professionals.</p>
+                </div>
+            </div>
+
+            <!-- Smart Bill -->
+            <div class="project-card" onclick="window.location.href='smartbill-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);">
+                    <img src="smartbill-icon.png" alt="Smart Bill">
+                </div>
+                <div class="project-info">
+                    <h3>Smart Bill</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Business</span>
+                        <span class="tag">Productivity</span>
+                    </div>
+                    <p>Smart billing made simple. Create professional invoices in seconds, track income, and manage your business finances on the go.</p>
+                </div>
+            </div>
+
+            <!-- VolunteerConnect -->
+            <div class="project-card" onclick="window.location.href='volunteerconnect-case-study-dark.html'">
+                <div class="project-image" style="background: linear-gradient(135deg, #0369a1 0%, #075985 100%);">
+                    <img src="volunteerconnect-icon.png" alt="VolunteerConnect">
+                </div>
+                <div class="project-info">
+                    <h3>VolunteerConnect</h3>
+                    <div class="project-tags">
+                        <span class="tag">Mobile App</span>
+                        <span class="tag">Community</span>
+                        <span class="tag">Social Impact</span>
+                    </div>
+                    <p>Join hands, impact communities. Connect volunteers with meaningful opportunities and help organizers manage impactful events.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title">About Me</h2>
+            <p>I'm a UI/UX designer passionate about creating user-centered designs that balance aesthetics with functionality. With experience in mobile and web applications, I focus on solving complex problems through simple, elegant solutions.</p>
+            <p>When I'm not designing, you can find me exploring new design trends, learning about emerging technologies, or sketching ideas for my next project.</p>
+            
+            <div class="skills">
+                <span class="skill">UI Design</span>
+                <span class="skill">UX Research</span>
+                <span class="skill">Figma</span>
+                <span class="skill">Prototyping</span>
+                <span class="skill">Wireframing</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Let's Work Together</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: #94a3b8; font-size: 1.1rem;">
+            I'm always interested in hearing about new projects and opportunities.
+        </p>
+        <div class="contact-links">
+            <a href="mailto:uiuxdesign444@gmail.com" class="contact-link">📧 Email Me</a>
+            <a href="https://wa.me/923359696474" class="contact-link" target="_blank">💬 WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Syed Zeeshan Hussain. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll effect to nav
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

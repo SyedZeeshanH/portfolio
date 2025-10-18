@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolunteerConnect - Case Study | Syed Zeeshan Hussain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        /* Navigation */
+        .back-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #0369a1;
+        }
+
+        /* Hero Section with Gradient Glow */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            background: #0f172a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(3, 105, 161, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(7, 89, 133, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
+            animation: glow-float 15s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(5%, -5%) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(-5%, 5%) scale(0.95);
+                opacity: 0.9;
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.6) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-shadow: 0 2px 20px rgba(3, 105, 161, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #cbd5e1;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #0ea5e9;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section ul {
+            color: #94a3b8;
+        }
+
+        .section ul li {
+            margin-bottom: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .section ul li strong {
+            color: #cbd5e1;
+        }
+
+        /* Screens Grid */
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .screens-grid img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Highlights Box */
+        .highlights {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlights li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .highlights li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .highlights li strong {
+            color: #cbd5e1;
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .principle-card:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .principle-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .principle-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* Color Palette */
+        .color-palette {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-box.blue {
+            background: #0369a1;
+        }
+
+        .color-box.orange {
+            background: #fb923c;
+        }
+
+        .color-box.cyan {
+            background: #06b6d4;
+        }
+
+        .color-box.white {
+            background: #ffffff;
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Challenge Solution */
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cs-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cs-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f87171;
+        }
+
+        .cs-card.solution h4 {
+            color: #34d399;
+        }
+
+        .cs-card p {
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .cs-card p strong {
+            color: #cbd5e1;
+        }
+
+        /* User Type Badge */
+        .user-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(3, 105, 161, 0.3);
+            color: #0ea5e9;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .user-badge.organizer {
+            background: rgba(251, 146, 60, 0.3);
+            color: #fb923c;
+            border-color: rgba(251, 146, 60, 0.3);
+        }
+
+        /* Key Takeaways */
+        .takeaways {
+            background: rgba(3, 105, 161, 0.2);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .takeaways h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .takeaways ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .takeaways li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #0ea5e9;
+        }
+
+        .takeaways li strong {
+            color: #f1f5f9;
+        }
+
+        /* Next Project */
+        .next-project {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(30, 41, 59, 0.3);
+            margin-top: 4rem;
+        }
+
+        .next-project h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(3, 105, 161, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(3, 105, 161, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .project-meta {
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-palette {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="back-nav">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>VolunteerConnect</h1>
+            <p class="hero-subtitle">Join Hands, Impact Communities</p>
+            <p class="hero-description">A dual-sided platform connecting volunteers with meaningful opportunities while empowering organizers to create, manage, and measure the impact of community events.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">UI/UX Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">5 Weeks</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Platform</div>
+                    <div class="meta-value">Mobile (iOS/Android)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Overview -->
+        <section class="section">
+            <h2 class="section-title">Project Overview</h2>
+            <p>Community volunteering faces a coordination crisis. Passionate individuals struggle to find meaningful opportunities, while organizers waste time on manual volunteer management and have no way to measure impact. VolunteerConnect was designed to bridge this gap by creating a comprehensive platform that serves both sides of the volunteering ecosystem.</p>
+            <p>This project required designing for two distinct user types with different needs: volunteers seeking impactful opportunities and organizers managing events and tracking engagement. The challenge was creating unified experiences that felt cohesive yet tailored to each user's goals.</p>
+        </section>
+
+        <!-- The Problem -->
+        <section class="section">
+            <h2 class="section-title">The Problem</h2>
+            <p>Through interviews with both volunteers and community organizers, I identified critical pain points on both sides:</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li><strong>Discovery Disconnect:</strong> Volunteers can't easily find nearby opportunities that match their interests and availability</li>
+                    <li><strong>Coordination Chaos:</strong> Organizers struggle with spreadsheets, phone calls, and no-shows for event management</li>
+                    <li><strong>No Impact Measurement:</strong> Organizers have no data showing volunteer engagement or event success</li>
+                    <li><strong>Motivation Gap:</strong> Volunteers lack recognition and progress tracking to stay engaged long-term</li>
+                    <li><strong>Emergency Response Delay:</strong> Critical community needs take too long to mobilize volunteers</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Target Audience -->
+        <section class="section">
+            <h2 class="section-title">Target Audience</h2>
+            <p><strong>Primary Users - Volunteers:</strong> Community-minded individuals (ages 18-45) who want to give back but struggle to find opportunities that fit their schedule and skills.</p>
+            <p><strong>Primary Users - Organizers:</strong> NGOs, community groups, and event coordinators who organize volunteer events but lack efficient tools for recruitment, coordination, and impact tracking.</p>
+            <p><strong>User Goals:</strong></p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Volunteers:</strong> Discover meaningful opportunities, track contributions, earn recognition, respond to emergencies</li>
+                <li><strong>Organizers:</strong> Create events quickly, recruit volunteers efficiently, track participation, measure impact</li>
+            </ul>
+        </section>
+
+        <!-- Design Process -->
+        <section class="section">
+            <h2 class="section-title">Design Process</h2>
+            
+            <h3 class="section-subtitle">1. Research & Discovery</h3>
+            <p>I conducted interviews with both volunteers and organizers, analyzed existing platforms like VolunteerMatch and Meetup, and identified that current solutions focused on one user type while ignoring the other's needs.</p>
+
+            <h3 class="section-subtitle">2. Dual Persona Development</h3>
+            <p>Created detailed personas for both user types to ensure the platform addressed distinct needs while maintaining a cohesive experience. This dual-sided approach influenced every design decision.</p>
+
+            <h3 class="section-subtitle">3. Information Architecture</h3>
+            <p>Designed separate yet complementary flows:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Volunteer Flow:</strong> Browse Events → Event Details → Join → Track Badges</li>
+                <li><strong>Organizer Flow:</strong> Dashboard → Create Event → Manage Volunteers → View Analytics</li>
+                <li><strong>Shared:</strong> User Selection → Onboarding → Role-Specific Experience</li>
+            </ul>
+
+            <h3 class="section-subtitle">4. Wireframing & Prototyping</h3>
+            <p>Started with separate wireframes for each user type to explore different interaction patterns before consolidating shared UI elements.</p>
+            
+            <div class="screens-grid">
+                <img src="volunteerconnect-wireframe-1.png" alt="Shared Wireframe">
+            </div>
+            <p style="text-align: center; color: #94a3b8; font-size: 0.95rem; margin-top: -1rem;">Shared onboarding wireframe for both user types</p>
+
+            <h4 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #0ea5e9;">Volunteer Wireframes:</h4>
+            <div class="screens-grid">
+                <img src="volunteerconnect-volunteer-wireframe-1.png" alt="Volunteer Wireframe 1">
+                <img src="volunteerconnect-volunteer-wireframe-2.png" alt="Volunteer Wireframe 2">
+                <img src="volunteerconnect-volunteer-wireframe-3.png" alt="Volunteer Wireframe 3">
+                <img src="volunteerconnect-volunteer-wireframe-4.png" alt="Volunteer Wireframe 4">
+            </div>
+
+            <h4 style="font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; color: #fb923c;">Organizer Wireframes:</h4>
+            <div class="screens-grid">
+                <img src="volunteerconnect-organizer-wireframe-1.png" alt="Organizer Wireframe 1">
+                <img src="volunteerconnect-organizer-wireframe-2.png" alt="Organizer Wireframe 2">
+                <img src="volunteerconnect-organizer-wireframe-3.png" alt="Organizer Wireframe 3">
+                <img src="volunteerconnect-organizer-wireframe-4.png" alt="Organizer Wireframe 4">
+                <img src="volunteerconnect-organizer-wireframe-5.png" alt="Organizer Wireframe 5">
+            </div>
+        </section>
+
+        <!-- Design Decisions -->
+        <section class="section">
+            <h2 class="section-title">Design Decisions</h2>
+            
+            <h3 class="section-subtitle">Color Palette</h3>
+            <p>The color scheme was strategically chosen to convey trust, community, and positive action:</p>
+            
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box blue"></div>
+                    <div class="color-label">Primary Blue #0369a1</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Trust & Community</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box orange"></div>
+                    <div class="color-label">Orange #fb923c</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Action & Energy</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box cyan"></div>
+                    <div class="color-label">Cyan #06b6d4</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Highlights & Badges</small>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box white"></div>
+                    <div class="color-label">White #ffffff</div>
+                    <small style="display: block; color: #64748b; margin-top: 0.3rem;">Clean Background</small>
+                </div>
+            </div>
+
+            <p><strong>Why Blue & Orange?</strong> Blue conveys trustworthiness and community spirit—essential for volunteer platforms. Orange represents action, warmth, and positive energy, motivating users to participate. The combination creates a professional yet approachable feel.</p>
+
+            <h3 class="section-subtitle">Typography & Visual Hierarchy</h3>
+            <p>Clear, friendly typography ensures information is easily scannable. Event cards use visual hierarchy to highlight key information (date, location, requirements) at a glance, while badges use color and iconography for instant recognition.</p>
+        </section>
+
+        <!-- Shared Screens -->
+        <section class="section">
+            <h2 class="section-title">Shared Experience</h2>
+            
+            <div class="screens-grid">
+                <img src="volunteerconnect-splash.png" alt="Splash Screen">
+                <img src="volunteerconnect-onboarding-1.png" alt="Onboarding 1">
+                <img src="volunteerconnect-onboarding-2.png" alt="Onboarding 2">
+            </div>
+
+            <h3 class="section-subtitle">1. Unified Onboarding</h3>
+            <p>The experience begins with a shared splash screen and onboarding that establishes the platform's purpose: "Join hands, Impact Communities." A crucial user selection screen asks "Which best describes you?" with options for Volunteer or Organizer/Organization, creating personalized paths from the start.</p>
+        </section>
+
+        <!-- Volunteer Features -->
+        <section class="section">
+            <h2 class="section-title"><span class="user-badge">Volunteer</span>Volunteer Experience</h2>
+            
+            <div class="screens-grid">
+                <img src="volunteerconnect-volunteer-home.png" alt="Volunteer Home">
+                <img src="volunteerconnect-volunteer-events.png" alt="Volunteer Events">
+                <img src="volunteerconnect-volunteer-event-details.png" alt="Event Details">
+                <img src="volunteerconnect-volunteer-account.png" alt="Volunteer Account">
+            </div>
+
+            <h3 class="section-subtitle">1. Discover Opportunities</h3>
+            <p>The volunteer home screen provides multiple discovery paths including nearby events, emergency actions, upcoming events, and a map view for location-based browsing. This ensures volunteers can find opportunities that match their availability and proximity.</p>
+
+            <h3 class="section-subtitle">2. Event Details & Requirements</h3>
+            <p>Event detail pages (like "Plantation Drive") display comprehensive information:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Date & Time:</strong> 01-Oct-2025, 10:00 AM</li>
+                <li><strong>Location:</strong> Islamabad with visual location pin</li>
+                <li><strong>Requirements:</strong> Bring a hat, Sunglasses, Sunscreen, And Gloves</li>
+                <li><strong>Description:</strong> Full context about the event's purpose and impact</li>
+                <li><strong>Clear Join Button:</strong> Simple, prominent action to participate</li>
+            </ul>
+
+            <h3 class="section-subtitle">3. Gamification & Recognition</h3>
+            <p>The account screen showcases a badge system that motivates continued participation:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Achievement Badges:</strong> "New Volunteer" (green), "Active Helper" (blue), "Community Champion" (orange)</li>
+                <li><strong>Milestones:</strong> First Event Attended, 5 Events Attended, 10+ Events</li>
+                <li><strong>Profile Management:</strong> Edit profile, notifications, support, log out</li>
+            </ul>
+        </section>
+
+        <!-- Organizer Features -->
+        <section class="section">
+            <h2 class="section-title"><span class="user-badge organizer">Organizer</span>Organizer Experience</h2>
+            
+            <div class="screens-grid">
+                <img src="volunteerconnect-organizer-dashboard.png" alt="Organizer Dashboard">
+                <img src="volunteerconnect-organizer-create-event.png" alt="Create Event">
+                <img src="volunteerconnect-organizer-event-details.png" alt="Organizer Event Details">
+            </div>
+
+            <h3 class="section-subtitle">1. Comprehensive Dashboard</h3>
+            <p>The organizer dashboard provides a complete overview of all events with clear categorization: Active Events, Upcoming Events, and Completed Events. Quick access to create new events ensures organizers can respond to community needs rapidly.</p>
+
+            <h3 class="section-subtitle">2. Streamlined Event Creation</h3>
+            <p>The create event flow minimizes friction while capturing essential information. Organizers can quickly set up events with date, time, location, requirements, and descriptions—making it easy to mobilize volunteers for urgent needs.</p>
+
+            <h3 class="section-subtitle">3. Event Management & Details</h3>
+            <p>Organizers see the same beautiful event detail view as volunteers, ensuring consistency, plus additional management controls for tracking signups and communicating with volunteers.</p>
+
+            <div class="screens-grid">
+                <img src="volunteerconnect-organizer-stats.png" alt="Organizer Stats">
+                <img src="volunteerconnect-organizer-account.png" alt="Organizer Account">
+            </div>
+
+            <h3 class="section-subtitle">4. Impact Analytics</h3>
+            <p>The stats screen provides crucial insights:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>Signup Metrics:</strong> How many volunteers registered for events</li>
+                <li><strong>Participation Rates:</strong> Actual attendance vs. registrations</li>
+                <li><strong>Top Volunteers:</strong> Recognition of the top 3 most active volunteers</li>
+                <li><strong>Event Performance:</strong> Data-driven insights for improving future events</li>
+            </ul>
+        </section>
+
+        <!-- Challenges & Solutions -->
+        <section class="section">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 1</h4>
+                    <p><strong>Problem:</strong> How to design one app that serves two completely different user types without confusion</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 1</h4>
+                    <p>Created a clear user selection during onboarding and designed distinct yet visually cohesive experiences for each user type</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 2</h4>
+                    <p><strong>Problem:</strong> Keeping volunteers motivated and engaged over time</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 2</h4>
+                    <p>Implemented a gamification system with achievement badges, milestones, and visual progress tracking</p>
+                </div>
+            </div>
+
+            <div class="challenge-solution">
+                <div class="cs-card">
+                    <h4>Challenge 3</h4>
+                    <p><strong>Problem:</strong> Providing organizers with actionable data without overwhelming them</p>
+                </div>
+                <div class="cs-card solution">
+                    <h4>Solution 3</h4>
+                    <p>Designed a simple stats dashboard with key metrics (signups, participation, top volunteers) that tell a clear story</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section class="section">
+            <h2 class="section-title">Design Principles</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h4>Two Sides, One Mission</h4>
+                    <p>Serve both volunteers and organizers while maintaining a unified brand experience</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Instant Clarity</h4>
+                    <p>Event information must be scannable at a glance—time, location, requirements</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Motivate Through Recognition</h4>
+                    <p>Badges and achievements create a sense of progress and community belonging</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Data-Driven Impact</h4>
+                    <p>Give organizers the metrics they need to measure success and improve</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Takeaways -->
+        <section class="section">
+            <div class="takeaways">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Dual-sided platforms need clear separation:</strong> User selection early in the flow prevents confusion and enables tailored experiences</li>
+                    <li><strong>Gamification drives retention:</strong> Badges and achievement systems give volunteers tangible rewards for intangible contributions</li>
+                    <li><strong>Impact needs measurement:</strong> Organizers can't improve what they can't measure—analytics are essential for community growth</li>
+                    <li><strong>Emergency features save communities:</strong> Quick-response mechanisms help mobilize volunteers when it matters most</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="section">
+            <h2 class="section-title">Impact & Results</h2>
+            <p>VolunteerConnect demonstrates my ability to design complex, dual-sided platforms that serve distinct user needs. The design balances volunteer discovery and motivation with organizer management and analytics.</p>
+            
+            <div class="highlights">
+                <ul>
+                    <li>Created separate yet cohesive experiences for two user types</li>
+                    <li>Designed a gamification system that motivates long-term volunteer engagement</li>
+                    <li>Built comprehensive analytics for organizers to measure impact</li>
+                    <li>Developed emergency response features for urgent community needs</li>
+                    <li>Established a scalable design system that supports both user flows</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="section">
+            <h2 class="section-title">Next Steps</h2>
+            <p>If this project were to move forward, I would:</p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><strong>Add team features</strong> for volunteers to join events with friends</li>
+                <li style="margin-bottom: 1rem;"><strong>Design skill-based matching</strong> to connect volunteers with opportunities matching their expertise</li>
+                <li style="margin-bottom: 1rem;"><strong>Create messaging system</strong> for organizers to communicate with volunteers</li>
+                <li style="margin-bottom: 1rem;"><strong>Implement push notifications</strong> for emergency events and reminders</li>
+                <li style="margin-bottom: 1rem;"><strong>Add photo sharing</strong> so volunteers can document their impact</li>
+                <li style="margin-bottom: 1rem;"><strong>Build calendar integration</strong> to sync events with personal schedules</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Next Project -->
+    <section class="next-project">
+        <h3>Thanks for reading!</h3>
+        <p style="max-width: 600px; margin: 0 auto 2rem; color: #94a3b8;">Want to see more of my work?</p>
+        <a href="index.html" class="button">Back to All Projects</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Syed Zeeshan Hussain. All rights reserved.</p>
+    </footer>
+</body>
+</html>
